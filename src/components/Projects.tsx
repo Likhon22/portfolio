@@ -12,7 +12,7 @@ const Projects = () => {
       title: "Blog Platform",
       description: "A full-featured blog platform with authentication",
       image: project1,
-      technologies: ["React", "Express.js", "Mongodb", "Mongoose", "Firebase"],
+      technologies: ["React", "Express.js", "TypeScript", "Mongodb", "Mongoose", "Firebase"],
       demoLink: "https://www.zenfla.com",
       codeLink: "#",
     },

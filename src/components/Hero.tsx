@@ -59,8 +59,7 @@ const Hero = () => {
         <div className="typing-wrapper">
           <div className="typing-container">
             <div className="typing-slider centered-slider">
-              <div className="typing-slide">Javascript Expert</div>
-              <div className="typing-slide">TypeScript Expert</div>
+              <div className="typing-slide">Javascript & TypeScript Expert</div>
               <div className="typing-slide">React & Next.js Developer</div>
               <div className="typing-slide">MongoDB & PostgreSQL</div>
               <div className="typing-slide">Node.js & Express.js</div>

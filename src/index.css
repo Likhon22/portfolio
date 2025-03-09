@@ -130,7 +130,7 @@ p {
   font-weight: 600;
 }
 
-/* Navigation */
+/* Navigation - Enhanced for particle visibility */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -141,32 +141,72 @@ p {
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.15); /* Much more transparent */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.1)
+  );
+  backdrop-filter: blur(4px); /* Reduced blur to see particles better */
+  -webkit-backdrop-filter: blur(4px);
   transition: var(--transition);
+  border-bottom: 1px solid rgba(41, 134, 204, 0.15);
 }
 
 .navbar.scrolled {
   padding: 1rem 5%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3); /* Still transparent when scrolled */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(41, 134, 204, 0.15);
+  border-bottom: 1px solid rgba(41, 134, 204, 0.3);
 }
 
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary-color);
+  position: relative;
+  z-index: 101;
+  text-shadow: 0 0 10px rgba(41, 134, 204, 0.6); /* Enhanced glow for better visibility */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  animation: pulse 2s infinite;
+  filter: drop-shadow(0 0 5px rgba(41, 134, 204, 0.7)); /* Add glow to icon */
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
 }
 
 .nav-links {
   display: flex;
   gap: 2rem;
+  position: relative;
+  z-index: 101;
 }
 
-.nav-links a {
+.nav-link {
   color: var(--text-light);
   font-weight: 500;
   position: relative;
+  transition: color 0.3s ease;
+  padding: 0.5rem;
 }
 
 .nav-links a::after {
@@ -178,14 +218,25 @@ p {
   height: 2px;
   background-color: var(--primary-color);
   transition: width 0.3s ease;
+  box-shadow: 0 0 8px var(--primary-color);
 }
 
 .nav-links a:hover {
   color: var(--primary-color);
+  text-shadow: 0 0 8px rgba(41, 134, 204, 0.5);
 }
 
 .nav-links a:hover::after {
   width: 100%;
+}
+
+.nav-links a {
+  color: var(--text-light);
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 0.5rem;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.8); /* Text shadow to help with readability */
 }
 
 /* Hero section */
@@ -699,6 +750,9 @@ p {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 0.8s ease, transform 0.8s ease;
+  position: relative; /* Ensure proper stacking context */
+  z-index: 2;
+  /* Border removed */
 }
 
 .about-section.visible {
@@ -816,6 +870,7 @@ p {
   font-size: 1.1rem;
   color: var(--text-light);
   line-height: 1.8;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Text shadow to help with readability */
 }
 
 /* Skills overview without animations */
@@ -1048,7 +1103,7 @@ p {
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  background-color: var(--card-bg);
+  background-color: var (--card-bg);
   border: 2px solid var(--primary-color);
   display: flex;
   align-items: center;
@@ -1172,13 +1227,16 @@ p {
   color: var(--primary-color);
 }
 
-/* Skills section */
+/* Skills section - Updated for particle visibility */
 .skills-section {
   padding: 6rem 0;
-  background-color: var(--dark-bg);
+  background-color: rgba(0, 0, 0, 0.7); /* Changed from solid to semi-transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
+  position: relative; /* Ensure proper stacking context */
+  z-index: 2;
+  /* Borders removed */
 }
 
 .skills-section.visible {
@@ -1205,7 +1263,9 @@ p {
 }
 
 .skill-card {
-  background-color: var(--card-bg);
+  background-color: rgba(18, 18, 18, 0.9); /* Slight transparency */
+  backdrop-filter: blur(5px); /* Blur effect behind cards */
+  -webkit-backdrop-filter: blur(5px);
   border-radius: 8px;
   padding: 1.8rem 1.5rem; /* Slightly more padding */
   transition: all 0.3s ease;
@@ -1323,6 +1383,7 @@ p {
   color: var(--text-muted);
   text-align: center;
   margin: 0;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Text shadow to help with readability */
 }
 
 /* Projects section */
@@ -1332,6 +1393,9 @@ p {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
+  position: relative; /* Ensure proper stacking context */
+  z-index: 2;
+  /* Border removed */
 }
 
 .projects-section.visible {
@@ -1414,6 +1478,7 @@ p {
   font-size: 0.95rem;
   color: var(--text-muted);
   margin-bottom: 1.2rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Text shadow to help with readability */
 }
 
 .project-tags {
@@ -1450,13 +1515,16 @@ p {
   text-decoration: underline;
 }
 
-/* Contact section */
+/* Contact section - Updated for particle visibility */
 .contact-section {
   padding: 6rem 0;
-  background-color: var(--dark-bg);
+  background-color: rgba(0, 0, 0, 0.7); /* Changed from solid to semi-transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
+  position: relative; /* Ensure proper stacking context */
+  z-index: 2;
+  /* Border removed */
 }
 
 .contact-section.visible {
@@ -1479,6 +1547,7 @@ p {
 .contact-text {
   font-size: 1.1rem;
   margin-bottom: 2rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Text shadow to help with readability */
 }
 
 .contact-methods {
@@ -1571,13 +1640,15 @@ p {
   box-shadow: 0 5px 15px rgba(41, 134, 204, 0.4);
 }
 
-/* Footer */
+/* Footer - Updated for particle visibility */
 .footer {
   padding: 2rem 0;
-  background-color: var(--darker-bg);
+  background-color: rgba(0, 0, 0, 0.7); /* Changed to transparent background */
   text-align: center;
   color: var(--text-muted);
   font-size: 0.9rem;
+  position: relative;
+  z-index: 2;
 }
 
 /* Responsive adjustments */
