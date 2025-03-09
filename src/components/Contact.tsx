@@ -45,23 +45,41 @@ const Contact = () => {
             <div className="contact-methods">
               <div className="contact-method">
                 <MdEmail className="contact-icon" />
-                <span>msarker212066@bscse.uiu.ac.bd</span>
+                <span>likhonsarker793@gmail.com</span>
               </div>
 
               <div className="social-links">
-                <a href="#" className="social-link" aria-label="GitHub">
+                <a
+                  href="https://github.com/Likhon22"
+                  target="_blank"
+                  className="social-link"
+                  aria-label="GitHub"
+                >
                   <FaGithub />
                 </a>
-                <a href="#" className="social-link" aria-label="LinkedIn">
+                <a
+                  href="https://www.linkedin.com/in/likhon-sarker-78395a336"
+                  target="_blank"
+                  className="social-link"
+                  aria-label="LinkedIn"
+                >
                   <FaLinkedin />
                 </a>
-                <a href="#" className="social-link" aria-label="Twitter">
-                  <FaTwitter />
-                </a>
-                <a href="#" className="social-link" aria-label="Facebook">
+
+                <a
+                  href="https://www.facebook.com/likhana.sarakara.169778"
+                  target="_blank"
+                  className="social-link"
+                  aria-label="Facebook"
+                >
                   <FaFacebook />
                 </a>
-                <a href="#" className="social-link" aria-label="Instagram">
+                <a
+                  href="https://www.instagram.com/likhon_sarker6404"
+                  target="_blank"
+                  className="social-link"
+                  aria-label="Instagram"
+                >
                   <FaInstagram />
                 </a>
               </div>

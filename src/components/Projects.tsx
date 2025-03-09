@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import project1 from "../assets/project1.png";
+import project2 from "../assets/project2.png";
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,21 +10,29 @@ const Projects = () => {
   const projects = [
     {
       title: "Blog Platform",
-      description:
-        "A full-featured blog platform with authentication and comment system.",
+      description: "A full-featured blog platform with authentication",
       image: project1,
       technologies: ["React", "Express.js", "Mongodb", "Mongoose", "Firebase"],
       demoLink: "https://www.zenfla.com",
       codeLink: "#",
     },
     {
-      title: "E-commerce Platform",
+      title: "University management robust project",
       description:
-        "A full-featured e-commerce platform with cart, checkout, and payment processing.",
-      image: "https://via.placeholder.com/600x340?text=E-commerce+Platform",
-      technologies: ["Next.js", "TypeScript", "MongoDB"],
+        "A full-featured university management system with authentication",
+      image: project2,
+      technologies: [
+        "Express.js",
+        "TypeScript",
+        "MongoDB",
+        "Mongoose",
+        "JWT",
+        "React",
+        "Redux",
+        "TailwindCSS",
+      ],
       demoLink: "#",
-      codeLink: "#",
+      codeLink: "https://github.com/Likhon22/university-management-system.git",
     },
     {
       title: "Task Management App",
