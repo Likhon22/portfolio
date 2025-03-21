@@ -44,8 +44,7 @@ const Hero = () => {
 
         {/* Main title */}
         <h1 className="hero-title">
-          Hi, I'm{" "}
-          <span className="highlight gradient-animated">Likhon Sarker</span>
+          Hi, I'm <span className="highlight gradient-animated">Likhon</span>
         </h1>
 
         {/* Subtitle with typing effect */}

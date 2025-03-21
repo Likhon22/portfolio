@@ -6,15 +6,41 @@ import project2 from "../assets/project2.png";
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  type TProject = {
+    title: string;
+    description: string;
+    image: string;
+    technologies: string[];
+    demoLink: string;
+    codeLink: {
+      frontend: string;
+      backend: string;
+      full: string;
+    };
+  };
   // Project data
-  const projects = [
+  const projects: TProject[] = [
     {
       title: "Blog Platform",
-      description: "A full-featured blog platform with authentication",
+      description:
+        "A full-featured blog platform with authentication and admin panel",
       image: project1,
-      technologies: ["React", "Express.js", "TypeScript", "Mongodb", "Mongoose", "Firebase"],
+      technologies: [
+        "React",
+        "TailwindCSS",
+        "Daisy UI",
+        "Express.js",
+        "TypeScript",
+        "Mongodb",
+        "Mongoose",
+        "Firebase",
+      ],
       demoLink: "https://www.zenfla.com",
-      codeLink: "#",
+      codeLink: {
+        frontend: "",
+        backend: "",
+        full: "",
+      },
     },
     {
       title: "University management robust project",
@@ -31,8 +57,13 @@ const Projects = () => {
         "Redux",
         "TailwindCSS",
       ],
-      demoLink: "#",
-      codeLink: "https://github.com/Likhon22/university-management-system.git",
+      demoLink: "",
+      codeLink: {
+        frontend:
+          "https://github.com/Likhon22/university-management-system-client.git",
+        backend: "https://github.com/Likhon22/university-management-system.git",
+        full: "",
+      },
     },
     {
       title: "Task Management App",
@@ -40,8 +71,12 @@ const Projects = () => {
         "A collaborative task management application with real-time updates.",
       image: "https://via.placeholder.com/600x340?text=Task+Management+App",
       technologies: ["React", "Node.js", "Socket.io"],
-      demoLink: "#",
-      codeLink: "#",
+      demoLink: "",
+      codeLink: {
+        frontend: "",
+        backend: "",
+        full: "",
+      },
     },
   ];
 
@@ -61,9 +96,41 @@ const Projects = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Handle the source code dropdown selection
+  const handleSourceCodeChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    project: TProject
+  ) => {
+    const selectedOption = e.target.value;
+    let url = "";
+
+    if (selectedOption === "frontend" && project.codeLink.frontend) {
+      url = project.codeLink.frontend;
+    } else if (selectedOption === "backend" && project.codeLink.backend) {
+      url = project.codeLink.backend;
+    } else if (selectedOption === "full" && project.codeLink.full) {
+      url = project.codeLink.full;
+    }
+
+    if (url) {
+      window.open(url, "_blank");
+      // Reset the select to default option after opening link
+      e.target.value = "default";
+    }
+  };
+
+  // Check if a project has any code links
+  const hasCodeLinks = (project: TProject) => {
+    return (
+      project.codeLink.frontend ||
+      project.codeLink.backend ||
+      project.codeLink.full
+    );
+  };
+
   return (
     <section
-      id="projects" // Ensure this ID is correct for navigation
+      id="projects"
       className={`projects-section ${isVisible ? "visible" : ""}`}
     >
       <div className="container">
@@ -86,16 +153,44 @@ const Projects = () => {
                   ))}
                 </div>
                 <div className="project-links">
-                  <a
-                    href={project.demoLink}
-                    target="_blank"
-                    className="project-link"
-                  >
-                    View Demo
-                  </a>
-                  <a href={project.codeLink} className="project-link">
-                    Source Code
-                  </a>
+                  {project.demoLink && (
+                    <a
+                      href={project.demoLink}
+                      target="_blank"
+                      className="project-link"
+                    >
+                      View Demo
+                    </a>
+                  )}
+
+                  {hasCodeLinks(project) && (
+                    <select
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "var(--primary-color)",
+                        fontWeight: 600,
+                        fontSize: "0.9rem",
+                        cursor: "pointer",
+                      }}
+                      defaultValue="default"
+                      className="project-link"
+                      onChange={(e) => handleSourceCodeChange(e, project)}
+                    >
+                      <option value="default" disabled>
+                        Source Code
+                      </option>
+                      {project.codeLink.frontend && (
+                        <option value="frontend">Frontend Code</option>
+                      )}
+                      {project.codeLink.backend && (
+                        <option value="backend">Backend Code</option>
+                      )}
+                      {project.codeLink.full && (
+                        <option value="full">Full Repository</option>
+                      )}
+                    </select>
+                  )}
                 </div>
               </div>
             </div>

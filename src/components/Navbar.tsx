@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       {/* Enhanced logo with icon */}
       <h1 className="logo">
-        <FaCode className="logo-icon" /> Likhon Sarker
+        <FaCode className="logo-icon" /> Likhon
       </h1>
       <div className="nav-links">
         <a

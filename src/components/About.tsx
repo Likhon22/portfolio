@@ -32,7 +32,7 @@ const About = () => {
         <div className="about-grid">
           {/* Left side - Simple image without animations */}
           <div className="about-image-wrapper">
-            <img src={me} alt="Likhon Sarker" className="about-image" />
+            <img src={me} alt="Likhon" className="about-image" />
 
             {/* Professional highlights - No animations */}
             <div className="highlights-box">

@@ -1230,7 +1230,12 @@ p {
 /* Skills section - Updated for particle visibility */
 .skills-section {
   padding: 6rem 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Changed from solid to semi-transparent */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Changed from solid to semi-transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
@@ -1518,7 +1523,12 @@ p {
 /* Contact section - Updated for particle visibility */
 .contact-section {
   padding: 6rem 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Changed from solid to semi-transparent */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Changed from solid to semi-transparent */
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease, transform 1s ease;
