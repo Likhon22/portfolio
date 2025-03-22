@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import project1 from "../assets/project1.png";
 import project2 from "../assets/project2.png";
+import project3 from "../assets/project3.png";
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -66,15 +67,26 @@ const Projects = () => {
       },
     },
     {
-      title: "Task Management App",
+      title: "Car Washing System",
       description:
-        "A collaborative task management application with real-time updates.",
-      image: "https://via.placeholder.com/600x340?text=Task+Management+App",
-      technologies: ["React", "Node.js", "Socket.io"],
+        " A car washing system provides car washing services for customers",
+      image: project3,
+      technologies: [
+        "React",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "Mongoose",
+        "JWT",
+        "Redux",
+        "RTK Query",
+        "TailwindCSS",
+        "Shadcn",
+      ],
       demoLink: "",
       codeLink: {
-        frontend: "",
-        backend: "",
+        frontend: "https://github.com/Likhon22/car-washing-system-frontend.git",
+        backend: "https://github.com/Likhon22/car-washing-system-backend.git",
         full: "",
       },
     },
