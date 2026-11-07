@@ -1,3 +1,68 @@
+import { useEffect, useRef, useState } from "react";
+
+const CountUp = ({
+  to,
+  suffix = "",
+  duration = 1500,
+  delay = 0,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+  delay?: number;
+}) => {
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setValue(to);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+
+    let rafId = 0;
+    let timeoutId = 0;
+
+    const run = () => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - (1 - progress) * (1 - progress);
+        setValue(Math.round(eased * to));
+        if (progress < 1) rafId = requestAnimationFrame(tick);
+      };
+      rafId = requestAnimationFrame(tick);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || started.current) return;
+        started.current = true;
+        // start right as the .reveal fade-in begins (0.65s delay)
+        // so it's already counting, not stuck at 0, once it appears
+        timeoutId = window.setTimeout(run, 650 + delay);
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timeoutId);
+      cancelAnimationFrame(rafId);
+    };
+  }, [to, duration, delay]);
+
+  return (
+    <span ref={ref}>
+      {value}
+      {suffix}
+    </span>
+  );
+};
+
 const Hero = () => {
   const scrollToSection = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -51,15 +116,21 @@ const Hero = () => {
 
           <div className="hero-stats reveal" style={{ animationDelay: "0.65s" }}>
             <div className="hero-stat">
-              <span className="hero-stat-num">3+</span>
+              <span className="hero-stat-num">
+                <CountUp to={3} suffix="+" delay={0} />
+              </span>
               <span className="hero-stat-label">years shipping production code</span>
             </div>
             <div className="hero-stat">
-              <span className="hero-stat-num">10+</span>
+              <span className="hero-stat-num">
+                <CountUp to={10} suffix="+" delay={150} duration={1700} />
+              </span>
               <span className="hero-stat-label">systems built end to end</span>
             </div>
             <div className="hero-stat">
-              <span className="hero-stat-num">3</span>
+              <span className="hero-stat-num">
+                <CountUp to={3} delay={300} />
+              </span>
               <span className="hero-stat-label">teams I've shipped with</span>
             </div>
           </div>
