@@ -1,210 +1,179 @@
-import { useEffect, useState } from "react";
+import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 
-import project1 from "../assets/project1.png";
-import project2 from "../assets/project2.png";
-import project3 from "../assets/project3.png";
+type Project = {
+  category: string;
+  title: string;
+  stack: string[];
+  points: string[];
+  liveUrl?: string;
+  liveLabel?: string;
+};
+
+const PROJECTS: Project[] = [
+  {
+    category: "full-stack · e-commerce",
+    title: "Prism — Online Bookstore Platform",
+    stack: ["Go", "Next.js", "PostgreSQL", "Cloudflare R2", "Docker"],
+    points: [
+      "Go/chi backend on pgx and sqlc: cookie-based JWT auth with rotating refresh tokens, multi-role RBAC, and atomic stock-reservation checkout.",
+      "SSLCommerz payments with server-to-server IPN validation, plus a Next.js storefront and admin panel with bilingual fuzzy search and full SEO.",
+    ],
+    liveUrl: "https://prismprokashoni.com/",
+    liveLabel: "prismprokashoni.com",
+  },
+  {
+    category: "full-stack · publishing",
+    title: "Enterprise Multi-Service News Ecosystem",
+    stack: ["Go", "Next.js", "PostgreSQL", "Caddy", "Docker"],
+    points: [
+      "High-concurrency Go/chi news engine with atomic database transactions, S3-compliant media handling, and HTML sanitization via Bluemonday.",
+      "Next.js reader frontend with SSG/ISR and bilingual SEO slugs, an admin CMS with RBAC and a TipTap editor, deployed behind Caddy on a Linux VPS.",
+    ],
+    liveUrl: "https://www.dhakapapers.com/",
+    liveLabel: "dhakapapers.com",
+  },
+  {
+    category: "backend · security",
+    title: "Sentinel — Evidence-Grade Endpoint Security Platform",
+    stack: ["Go", "PostgreSQL", "Next.js", "Docker"],
+    points: [
+      "Go/chi backend and Windows agent for tamper-evident endpoint monitoring: SHA-256-hashed device enrollment and an append-only tamper-event audit trail.",
+      "Agent self-update pipeline with automatic rollback on a broken release, running in production behind Cloudflare against a real monitored device fleet.",
+    ],
+  },
+  {
+    category: "frontend",
+    title: "Nourish Corporate Ecosystem",
+    stack: ["Next.js", "TypeScript", "Framer Motion"],
+    points: [
+      "High-performance corporate frontend built with Next.js and Framer Motion, using scroll-linked scaling and physics-based interactions for a premium, fluid feel.",
+      "Engineered a mobile-first navigation system with independent event handling, keeping data-driven content separate from UI components for easy updates.",
+    ],
+    liveUrl: "https://www.nourish-poultry.com/",
+    liveLabel: "nourish-poultry.com",
+  },
+  {
+    category: "backend · microservices",
+    title: "E-Commerce Microservices Platform",
+    stack: ["Go", "Node.js", "gRPC", "Kong", "Redis", "MongoDB"],
+    points: [
+      "Go and Node.js services for Auth, Product, Cart, and Order, talking over gRPC for low-latency, high-concurrency transactions.",
+      "Kong API Gateway for routing, JWT validation, and JSON-to-gRPC translation, with Redis caching and Prometheus/Grafana observability.",
+    ],
+  },
+  {
+    category: "ai tooling",
+    title: "IELTS Speaking Grader",
+    stack: ["Python", "FastAPI", "Whisper", "Gemini", "Docker"],
+    points: [
+      "Full speech pipeline: local Whisper transcription, Edge-TTS question narration, and Gemini-powered grading against a rubric-engineered prompt.",
+      "Shipped as a Streamlit app and a documented FastAPI backend sharing the same services, containerized and verified end to end against real audio.",
+    ],
+  },
+  {
+    category: "ai tooling",
+    title: "Business Card Data Extractor",
+    stack: ["Python", "Gemini API", "Streamlit", "Google APIs"],
+    points: [
+      "Extracts structured contact data from business-card images using the Gemini vision API with a JSON schema, handling rate limits without losing progress.",
+      "Two pipelines in one Streamlit UI: Google Drive images in and Google Sheets out via a service-account OAuth flow, or a local-folder mode exporting CSV.",
+    ],
+  },
+  {
+    category: "ai tooling",
+    title: "Messenger Inbox Triage",
+    stack: ["Python", "Meta Messenger API", "Gemini", "Telegram Bot API"],
+    points: [
+      "Webhook service that classifies incoming Messenger messages against a business owner's own priority rules using the Gemini API.",
+      "Routes matches to a priority queue and pushes them to Telegram, with a reply-draft step so the owner approves before anything sends.",
+    ],
+  },
+];
+
+const MORE_BUILDS = [
+  { name: "Blog Platform", stack: "React · Firebase · Cloudinary", url: "https://www.zenfla.com" },
+  {
+    name: "University Management System",
+    stack: "Express · MongoDB · React · Redux",
+    url: "https://github.com/Likhon22/university-management-system-client.git",
+  },
+  {
+    name: "Car Washing System",
+    stack: "React · Node.js · MongoDB · RTK Query",
+    url: "https://github.com/Likhon22/car-washing-system-frontend.git",
+  },
+  { name: "High-Performance School Management API", stack: "Go · PostgreSQL · Zerolog" },
+  { name: "EasyWear E-Commerce", stack: "React · Redux Toolkit · Node.js" },
+  { name: "QuickAi", stack: "Node.js · PostgreSQL · TypeScript" },
+];
 
 const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  type TProject = {
-    title: string;
-    description: string;
-    image: string;
-    technologies: string[];
-    demoLink: string;
-    codeLink: {
-      frontend: string;
-      backend: string;
-      full: string;
-    };
-  };
-  // Project data
-  const projects: TProject[] = [
-    {
-      title: "Blog Platform",
-      description:
-        "A full-featured blog platform with authentication and admin panel",
-      image: project1,
-      technologies: [
-        "React",
-        "TailwindCSS",
-        "Daisy UI",
-        "Express.js",
-        "TypeScript",
-        "Mongodb",
-        "Mongoose",
-        "Firebase",
-      ],
-      demoLink: "https://www.zenfla.com",
-      codeLink: {
-        frontend: "",
-        backend: "",
-        full: "",
-      },
-    },
-    {
-      title: "University management robust project",
-      description:
-        "A full-featured university management system with authentication",
-      image: project2,
-      technologies: [
-        "Express.js",
-        "TypeScript",
-        "MongoDB",
-        "Mongoose",
-        "JWT",
-        "React",
-        "Redux",
-        "TailwindCSS",
-      ],
-      demoLink: "",
-      codeLink: {
-        frontend:
-          "https://github.com/Likhon22/university-management-system-client.git",
-        backend: "https://github.com/Likhon22/university-management-system.git",
-        full: "",
-      },
-    },
-    {
-      title: "Car Washing System",
-      description:
-        " A car washing system provides car washing services for customers",
-      image: project3,
-      technologies: [
-        "React",
-        "Node.js",
-        "Express.js",
-        "MongoDB",
-        "Mongoose",
-        "JWT",
-        "Redux",
-        "RTK Query",
-        "TailwindCSS",
-        "Shadcn",
-      ],
-      demoLink: "",
-      codeLink: {
-        frontend: "https://github.com/Likhon22/car-washing-system-frontend.git",
-        backend: "https://github.com/Likhon22/car-washing-system-backend.git",
-        full: "",
-      },
-    },
-  ];
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const element = document.getElementById("projects");
-    if (element) observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Handle the source code dropdown selection
-  const handleSourceCodeChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    project: TProject
-  ) => {
-    const selectedOption = e.target.value;
-    let url = "";
-
-    if (selectedOption === "frontend" && project.codeLink.frontend) {
-      url = project.codeLink.frontend;
-    } else if (selectedOption === "backend" && project.codeLink.backend) {
-      url = project.codeLink.backend;
-    } else if (selectedOption === "full" && project.codeLink.full) {
-      url = project.codeLink.full;
-    }
-
-    if (url) {
-      window.open(url, "_blank");
-      // Reset the select to default option after opening link
-      e.target.value = "default";
-    }
-  };
-
-  // Check if a project has any code links
-  const hasCodeLinks = (project: TProject) => {
-    return (
-      project.codeLink.frontend ||
-      project.codeLink.backend ||
-      project.codeLink.full
-    );
-  };
-
   return (
-    <section
-      id="projects"
-      className={`projects-section ${isVisible ? "visible" : ""}`}
-    >
+    <section id="projects" className="section">
       <div className="container">
-        <h2 className="section-title">Featured Projects</h2>
+        <div className="section-head">
+          <span className="eyebrow">projects</span>
+          <h2 className="section-title">Selected work</h2>
+          <p className="section-lede">
+            A handful of systems I've built end to end — from the database up
+            through the interface someone actually clicks on.
+          </p>
+        </div>
 
-        <div className="project-grid">
-          {projects.map((project, index) => (
-            <div key={index} className="project-card">
-              <div className="project-image">
-                <img src={project.image} alt={project.title} />
-              </div>
-              <div className="project-content">
-                <h3 className="project-title">{project.title}</h3>
-                <p className="project-description">{project.description}</p>
+        <div>
+          {PROJECTS.map((p) => (
+            <article className="project-row" key={p.title}>
+              <div className="project-meta">
+                <span className="project-category">{p.category}</span>
                 <div className="project-tags">
-                  {project.technologies.map((tech, i) => (
-                    <span key={i} className="project-tag">
-                      {tech}
+                  {p.stack.map((s) => (
+                    <span className="project-tag" key={s}>
+                      {s}
                     </span>
                   ))}
                 </div>
-                <div className="project-links">
-                  {project.demoLink && (
-                    <a
-                      href={project.demoLink}
-                      target="_blank"
-                      className="project-link"
-                    >
-                      View Demo
-                    </a>
-                  )}
-
-                  {hasCodeLinks(project) && (
-                    <select
-                      style={{
-                        backgroundColor: "transparent",
-                        border: "none",
-                        color: "var(--primary-color)",
-                        fontWeight: 600,
-                        fontSize: "0.9rem",
-                        cursor: "pointer",
-                      }}
-                      defaultValue="default"
-                      className="project-link"
-                      onChange={(e) => handleSourceCodeChange(e, project)}
-                    >
-                      <option value="default" disabled>
-                        Source Code
-                      </option>
-                      {project.codeLink.frontend && (
-                        <option value="frontend">Frontend Code</option>
-                      )}
-                      {project.codeLink.backend && (
-                        <option value="backend">Backend Code</option>
-                      )}
-                      {project.codeLink.full && (
-                        <option value="full">Full Repository</option>
-                      )}
-                    </select>
-                  )}
-                </div>
               </div>
+              <div>
+                <h3 className="project-title">{p.title}</h3>
+                <ul className="project-points">
+                  {p.points.map((pt, i) => (
+                    <li key={i}>{pt}</li>
+                  ))}
+                </ul>
+                {p.liveUrl && (
+                  <a
+                    href={p.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="project-link"
+                  >
+                    {p.liveLabel} <FiArrowUpRight size={14} />
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="more-builds">
+          <h3 className="more-builds-title">more builds</h3>
+          {MORE_BUILDS.map((b) => (
+            <div className="more-row" key={b.name}>
+              {b.url ? (
+                <a
+                  href={b.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="more-name"
+                  style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+                >
+                  {b.name}
+                  {b.url.includes("github.com") ? <FiGithub size={13} /> : <FiArrowUpRight size={13} />}
+                </a>
+              ) : (
+                <span className="more-name">{b.name}</span>
+              )}
+              <span className="more-stack">{b.stack}</span>
             </div>
           ))}
         </div>

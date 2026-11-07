@@ -1,7 +1,10 @@
 const Footer = () => {
   return (
-    <footer className="footer">
-      <p>© {new Date().getFullYear()} Likhon. All rights reserved.</p>
+    <footer className="footer theme-dark" data-nav-theme="dark">
+      <div className="container footer-inner">
+        <p>Main Uddin Sarker — Dhaka, Bangladesh</p>
+        <span>© {new Date().getFullYear()}</span>
+      </div>
     </footer>
   );
 };

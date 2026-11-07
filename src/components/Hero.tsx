@@ -1,94 +1,109 @@
-import { useEffect, useState } from "react";
-import { FaArrowRight, FaCode } from "react-icons/fa";
-
 const Hero = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    // Add fade-in animation when component mounts
-    setIsLoaded(true);
-  }, []);
-
-  // Add stopPropagation to prevent clicks from reaching particles background
-  const scrollToSection = (sectionId: string, e: React.MouseEvent) => {
+  const scrollToSection = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
-    e.stopPropagation(); // Stop event bubbling to particles layer
-
-    const section = document.getElementById(sectionId);
-    if (section) {
-      // Ensure proper scrolling with offset for navbar
-      const navbarHeight = 80; // Approximate navbar height
-      const sectionTop =
-        section.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-      window.scrollTo({ top: sectionTop, behavior: "smooth" });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="hero" id="home">
-      <div className={`hero-content ${isLoaded ? "loaded" : ""}`}>
-        {/* Decorative background elements */}
-        <div className="hero-bg-elements">
-          <div className="hero-shape shape-1"></div>
-          <div className="hero-shape shape-2"></div>
-          <div className="hero-shape shape-3"></div>
-        </div>
+    <section className="hero theme-dark" id="home" data-nav-theme="dark">
+      <div className="hero-glow" aria-hidden="true" />
+      <div className="container hero-grid">
+        <div className="hero-inner">
+          <p className="hero-eyebrow reveal" style={{ animationDelay: "0.05s" }}>
+            Dhaka, Bangladesh <span>·</span> Open to new opportunities
+          </p>
 
-        {/* Tag line */}
-        <div className="hero-tag">
-          <span className="hero-icon">
-            <FaCode />
-          </span>
-          <span>Full Stack Developer</span>
-        </div>
+          <h1 className="hero-title reveal" style={{ animationDelay: "0.17s" }}>
+            Software engineer, <em>end to end.</em>
+          </h1>
 
-        {/* Main title */}
-        <h1 className="hero-title">
-          Hi, I'm <span className="highlight gradient-animated">Likhon</span>
-        </h1>
+          <p className="hero-subtitle reveal" style={{ animationDelay: "0.29s" }}>
+            I design and ship backend systems and the products that sit on top
+            of them — Go and Node.js services running in production, Next.js
+            and React interfaces people actually use, deployed on real
+            infrastructure I keep running myself.
+          </p>
 
-        {/* Subtitle with typing effect */}
-        <p className="hero-subtitle">
-          I build{" "}
-          <span className="hero-emphasis">exceptional digital experiences</span>{" "}
-          with modern web technologies
-        </p>
+          <div className="hero-stack reveal" style={{ animationDelay: "0.41s" }}>
+            {["Go", "TypeScript", "Next.js", "PostgreSQL", "Docker"].map((tech) => (
+              <span key={tech} className="chip">
+                {tech}
+              </span>
+            ))}
+          </div>
 
-        {/* Centered typing animation container without static text */}
-        <div className="typing-wrapper">
-          <div className="typing-container">
-            <div className="typing-slider centered-slider">
-              <div className="typing-slide">Javascript & TypeScript Expert</div>
-              <div className="typing-slide">React & Next.js Developer</div>
-              <div className="typing-slide">MongoDB & PostgreSQL</div>
-              <div className="typing-slide">Node.js & Express.js</div>
+          <div className="hero-actions reveal" style={{ animationDelay: "0.53s" }}>
+            <a
+              href="#contact"
+              onClick={(e) => scrollToSection("contact", e)}
+              className="btn btn-primary"
+            >
+              Get in touch
+            </a>
+            <a
+              href="#projects"
+              onClick={(e) => scrollToSection("projects", e)}
+              className="btn btn-outline"
+            >
+              See my work
+            </a>
+          </div>
+
+          <div className="hero-stats reveal" style={{ animationDelay: "0.65s" }}>
+            <div className="hero-stat">
+              <span className="hero-stat-num">3+</span>
+              <span className="hero-stat-label">years shipping production code</span>
+            </div>
+            <div className="hero-stat">
+              <span className="hero-stat-num">10+</span>
+              <span className="hero-stat-label">systems built end to end</span>
+            </div>
+            <div className="hero-stat">
+              <span className="hero-stat-num">3</span>
+              <span className="hero-stat-label">teams I've shipped with</span>
             </div>
           </div>
         </div>
 
-        {/* Call to action buttons with improved click handling */}
-        <div
-          className="hero-buttons"
-          style={{ position: "relative", zIndex: 20 }}
-        >
-          <a
-            href="#contact"
-            onClick={(e) => scrollToSection("contact", e)}
-            className="primary-button"
-            style={{ position: "relative", zIndex: 20 }}
-          >
-            Contact Me <FaArrowRight className="button-icon" />
-          </a>
-          <a
-            href="#projects"
-            onClick={(e) => scrollToSection("projects", e)}
-            className="outline-button"
-            style={{ position: "relative", zIndex: 20 }}
-          >
-            View Projects
-          </a>
+        <div className="hero-visual reveal" style={{ animationDelay: "0.4s" }}>
+          <div className="terminal-card">
+            <div className="terminal-bar">
+              <span className="terminal-dot" />
+              <span className="terminal-dot" />
+              <span className="terminal-dot" />
+              <span className="terminal-title">likhon — zsh</span>
+            </div>
+            <div className="terminal-body">
+              <p>
+                <span className="terminal-prompt">$</span> whoami
+              </p>
+              <p className="terminal-out">likhon · full-stack engineer</p>
+              <p>
+                <span className="terminal-prompt">$</span> cat stack.txt
+              </p>
+              <p className="terminal-out">go · typescript · next.js · postgres</p>
+              <p>
+                <span className="terminal-prompt">$</span> systemctl status likhon
+              </p>
+              <p className="terminal-out">
+                <span className="terminal-status" /> active — still running, right now
+                <span className="terminal-cursor" />
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <a
+        href="#about"
+        onClick={(e) => scrollToSection("about", e)}
+        className="hero-scroll-cue reveal"
+        style={{ animationDelay: "0.8s" }}
+        aria-label="Scroll to about section"
+      >
+        <span className="hero-scroll-line" />
+        <span>Scroll</span>
+      </a>
     </section>
   );
 };

@@ -1,75 +1,74 @@
-import { useEffect, useState } from "react";
-import { FaCode } from "react-icons/fa"; // Import icon for enhanced navbar
+import { useEffect, useRef, useState } from "react";
+
+const NAV_ITEMS = [
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "skills", label: "Skills" },
+  { id: "projects", label: "Work" },
+];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [overDark, setOverDark] = useState(true);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
+    const darkSections = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-nav-theme="dark"]')
+    );
+
+    const update = () => {
+      setScrolled(window.scrollY > 10);
+
+      const navHeight = navRef.current?.offsetHeight ?? 72;
+      const probeY = navHeight / 2;
+      const over = darkSections.some((el) => {
+        const rect = el.getBoundingClientRect();
+        return rect.top <= probeY && rect.bottom >= probeY;
+      });
+      setOverDark(over);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
     };
-  }, [scrolled]);
+  }, []);
 
-  const scrollToSection = (sectionId: string, e: React.MouseEvent) => {
+  const scrollToSection = (id: string, e: React.MouseEvent) => {
     e.preventDefault();
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
-      {/* Enhanced logo with icon */}
-      <h1 className="logo">
-        <FaCode className="logo-icon" /> Likhon
-      </h1>
-      <div className="nav-links">
-        <a
-          href="#home"
-          onClick={(e) => scrollToSection("home", e)}
-          className="nav-link"
-        >
-          Home
+    <header
+      ref={navRef}
+      className={`navbar ${scrolled ? "scrolled" : ""} ${overDark ? "theme-dark" : ""}`}
+    >
+      <div className="navbar-inner">
+        <a href="#home" onClick={(e) => scrollToSection("home", e)} className="logo">
+          Likhon<span className="logo-mark">.</span>
         </a>
-        <a
-          href="#about"
-          onClick={(e) => scrollToSection("about", e)}
-          className="nav-link"
-        >
-          About
-        </a>
-        <a
-          href="#skills"
-          onClick={(e) => scrollToSection("skills", e)}
-          className="nav-link"
-        >
-          Skills
-        </a>
-        <a
-          href="#projects"
-          onClick={(e) => scrollToSection("projects", e)}
-          className="nav-link"
-        >
-          Projects
-        </a>
-        <a
-          href="#contact"
-          onClick={(e) => scrollToSection("contact", e)}
-          className="nav-link"
-        >
-          Contact
+        <nav className="nav-links">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => scrollToSection(item.id, e)}
+              className="nav-link"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <a href="#contact" onClick={(e) => scrollToSection("contact", e)} className="nav-cta">
+          Get in touch
         </a>
       </div>
-    </nav>
+    </header>
   );
 };
 
