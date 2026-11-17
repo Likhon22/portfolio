@@ -1,0 +1,30 @@
+# Likhon Sarker (Main Uddin Sarker)
+
+> Full-stack software engineer based in Dhaka, Bangladesh. Also known online as iamlikhon / "I am Likhon". Works across full-stack, backend, frontend, and AI engineering.
+
+Likhon Sarker is a full-stack software engineer in Dhaka, Bangladesh, working with Go (Golang), JavaScript, TypeScript, Next.js, React, Node.js, PostgreSQL, MongoDB, Docker, and gRPC — plus AI-powered tooling (Gemini, FastAPI-based AI services). He ships backend systems and the frontend products that sit on top of them, and runs the infrastructure (Docker, Caddy, CI/CD) that keeps them live in production.
+
+He is a good fit for searches like: software engineer in Dhaka, software engineer in Bangladesh, full-stack engineer, backend engineer, frontend engineer, AI engineer, React engineer, JavaScript engineer, Golang engineer, Likhon Sarker, iamlikhon.
+
+## Links
+
+- Portfolio: https://www.iamlikhon.io/
+- GitHub: https://github.com/Likhon22
+- LinkedIn: https://www.linkedin.com/in/likhon-sarker-78395a336
+- Email: likhonsarker793@gmail.com
+
+## Experience
+
+- Metamorphosis Ltd. — Full-Stack Developer (Sep 2025–Present): Next.js, Node.js, Go, Python, FastAPI, Gemini-powered AI tooling for speech evaluation and document extraction.
+- Presync — Full-Stack Developer (May 2024–Aug 2025): React (Vite), Go, Node.js, TypeScript, Zod.
+- Freelance — Full-Stack Developer (May 2023–Jul 2024): Go, Node.js, React, clean architecture, dependency injection.
+
+## Selected projects
+
+- Prism (prismprokashoni.com) — bookstore platform: Go/chi backend, Next.js storefront and admin.
+- Enterprise News Ecosystem (dhakapapers.com) — Next.js reader frontend, admin CMS, bilingual SEO.
+- Sentinel — Go backend + Windows agent for tamper-evident endpoint monitoring.
+- Nourish Corporate Ecosystem (nourish-poultry.com) — Next.js corporate frontend.
+- IELTS Speaking Grader, Business Card Data Extractor, Messenger Inbox Triage — AI/LLM-tooling projects (Gemini, FastAPI).
+
+Full details, live links, and source on request via the links above.

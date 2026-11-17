@@ -40,9 +40,10 @@ const About = () => {
             <div className="about-text">
               <p>
                 I'm <strong>Main Uddin Sarker</strong> — most people know me as
-                Likhon. I'm a full-stack software engineer based in Dhaka,
-                working across Go, Node.js, and TypeScript to build services
-                that hold up once real users and real data show up.
+                Likhon, and online I go by iamlikhon. I'm a full-stack software
+                engineer based in Dhaka, working across Go (Golang), Node.js,
+                JavaScript, and TypeScript to build services that hold up once
+                real users and real data show up.
               </p>
               <p>
                 My day-to-day spans REST and gRPC APIs, PostgreSQL and MongoDB

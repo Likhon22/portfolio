@@ -10,8 +10,9 @@ const Contact = () => {
           <span className="eyebrow">contact</span>
           <h2 className="section-title">Let's talk</h2>
           <p className="section-lede">
-            I'm based in Dhaka and open to full-stack and backend-focused
-            roles, freelance builds, or just a good technical conversation.
+            I'm based in Dhaka and open to full-stack, backend, frontend, or
+            AI engineering roles, freelance builds, or just a good technical
+            conversation.
           </p>
         </div>
 

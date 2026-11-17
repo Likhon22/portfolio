@@ -1,8 +1,8 @@
 const SKILL_GROUPS = [
   {
     title: "languages & core",
-    core: ["Go", "TypeScript"],
-    items: ["Go", "TypeScript", "JavaScript", "Python", "SQL"],
+    core: ["Go (Golang)", "TypeScript"],
+    items: ["Go (Golang)", "TypeScript", "JavaScript", "Python", "SQL", "AI / LLM Tooling"],
     note: "The backbone of Prism, Sentinel, the news platform, and most of the AI tooling.",
   },
   {
